@@ -1,63 +1,114 @@
 :root {
-    --primary-blue: #1e88e5;
-    --dark-blue: #005cb2;
-    --light-blue: #6ab7ff;
-    --forest-green: #2e7d32;
-    --light-green: #60ad5e;
-    --white: #ffffff;
-    --light-gray: rgba(245, 245, 245, 0.8);
-    --dark-gray: #333333;
-    --alert-orange: #ff9800;
-  }
-  
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('/pogacar.webp');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
-    color: var(--dark-gray);
-  }
-  
-  header {
-    background-color: rgba(30, 136, 229, 0.8);
-    color: var(--white);
-    text-align: center;
-    padding: 1em;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  }
-  
-  main {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-  }
-  
-  .feature {
-    background-color: var(--light-gray);
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  
-  .feature h2 {
-    color: var(--forest-green);
-  }
-  
-  button {
-    background-color: var(--alert-orange);
-    color: var(--white);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  button:hover {
-    background-color: var(--alert-orange);
-  }
-  
+  --primary-blue: #1e88e5;
+  --dark-blue: #005cb2;
+  --light-blue: #6ab7ff;
+  --forest-green: #2e7d32;
+  --light-green: #60ad5e;
+  --white: #ffffff;
+  --light-gray: rgba(245, 245, 245, 0.8);
+  --dark-gray: #333333;
+  --alert-orange: #ff9800;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('/pogacar.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  color: var(--dark-gray);
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background-color: rgba(30, 136, 229, 0.8);
+  color: var(--white);
+  padding: 1em;
+  text-align: center;
+}
+
+main {
+  flex-grow: 1;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.feature {
+  background-color: var(--light-gray);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.feature h2 {
+  color: var(--forest-green);
+}
+
+button {
+  background-color: var(--alert-orange);
+  color: var(--white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+.feature:first-of-type button:hover {
+  background-color: #ffa726;
+}
+
+.bottom-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: transform 0.3s ease;
+  transform: translateY(calc(100% - 40px));
+}
+
+.bottom-menu.open {
+  transform: translateY(0);
+}
+
+.toggle-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.menu-items {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--dark-gray);
+}
+
+.icon {
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.text {
+  font-size: 12px;
+}

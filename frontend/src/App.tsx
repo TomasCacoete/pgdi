@@ -1,14 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './index.css';
-
-const Header: React.FC = () => {
-  return (
-    <header>
-      <h1>CycleTrack</h1>
-      <p>Your Ultimate Cycling Companion</p>
-    </header>
-  );
-}
 
 interface FeatureProps {
   title: string;
@@ -27,7 +18,25 @@ const Feature: React.FC<FeatureProps> = ({ title, description, buttonText, onCli
   );
 }
 
+interface MenuItemProps {
+  icon: string;
+  text: string;
+}
+
+const MenuItem: React.FC<MenuItemProps> = ({ icon, text }) => (
+  <div className="menu-item">
+    <span className="icon">{icon}</span>
+    <span className="text">{text}</span>
+  </div>
+);
+
 const App: React.FC = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   const handleStartRide = (): void => {
     alert('Ride tracking started!');
   };
@@ -42,7 +51,10 @@ const App: React.FC = () => {
 
   return (
     <div className="App">
-      <Header />
+      <header>
+        <h1>CycleTrack</h1>
+        <p>Your Ultimate Cycling Companion</p>
+      </header>
       <main>
         <Feature
           title="Track Your Ride"
@@ -63,6 +75,18 @@ const App: React.FC = () => {
           onClick={handleFindRoutes}
         />
       </main>
+      <div className={`bottom-menu ${isMenuOpen ? 'open' : ''}`}>
+        <button className="toggle-btn" onClick={toggleMenu}>
+          {isMenuOpen ? '▼' : '▲'}
+        </button>
+        <div className="menu-items">
+          <MenuItem icon="🏠" text="Home" />
+          <MenuItem icon="📊" text="Dashboard" />
+          <MenuItem icon="🚲" text="My Rides" />
+          <MenuItem icon="🗺️" text="Routes" />
+          <MenuItem icon="⚙️" text="Settings" />
+        </div>
+      </div>
     </div>
   );
 }
