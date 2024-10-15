@@ -16,7 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from pgdi_api.views import view_test  # vai buscar a funcao em views.py
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('teste/', view_test),
+    
 ]
