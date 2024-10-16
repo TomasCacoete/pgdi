@@ -52,8 +52,8 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header>
-        <h1>CycleTrack</h1>
-        <p>Your Ultimate Cycling Companion</p>
+        <h1>Amateur's Tour</h1>
+        <p>Your Flexible Cycling Competition</p>
       </header>
       <main>
         <Feature
