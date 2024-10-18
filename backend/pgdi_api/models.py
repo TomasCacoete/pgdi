@@ -30,5 +30,5 @@ class Competition_Route(models.Model):
 
 class Submission(models.Model):
     route_id = models.ForeignKey(Route, on_delete=models.CASCADE)
-    contestant_competition_id = 
+    contestant_competition_id = models.ForeignKey(Competition, on_delete=models.CASCADE)
     # submission_file = models.FileField(upload_to='submissions/')
