@@ -5,5 +5,5 @@ from .models import *
 from .views import *
 
 urlpatterns = [
-    path('user/', CreateUser.as_view()),
+
 ]
