@@ -10,7 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
         }
         
     def create(self, validated_data):
-        user_type = self.context['request'].data.get('user_type', 'user')
+        # Default user type is 'contestant' if not specified
+        user_type = self.context['request'].data.get('user_type', 'contestant').lower()
         
         # Create a base user
         user = User.objects.create_user(**validated_data)
@@ -22,3 +23,4 @@ class UserSerializer(serializers.ModelSerializer):
             Creator.objects.create(user=user)
 
         return user
+
