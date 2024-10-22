@@ -11,23 +11,21 @@ class User(AbstractUser):
     
     user_type = models.CharField(max_length=10, choices=USER_TYPES,blank=True, default='contestant') #pode ser omitido mas se pretender ser creator tem de passar parametro
 
-    
-    
     def __str__(self):
-        return self.name
+        return self.username
     
 
 class Contestant(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Contestant: {self.user.name}"
+        return f"Contestant: {self.user.username}"
 
 class Creator(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def customMethod(self):
-        return f'sou um criador de competicoes'
+    def __str__(self):
+        return f"Creator: {self.user.username}"
     
     
 class Competition(models.Model):
