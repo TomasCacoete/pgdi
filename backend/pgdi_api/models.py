@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-# Create your models here.
-
 class User(AbstractUser):
     phone_no=models.CharField(max_length=15)
     
@@ -16,16 +14,17 @@ class User(AbstractUser):
     
     
     def __str__(self):
-        return self.username
+        return self.name
+    
 
 class Contestant(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def customMethod(self):
-        return f'sou um competidor'
+    def __str__(self):
+        return f"Contestant: {self.user.name}"
 
 class Creator(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def customMethod(self):
         return f'sou um criador de competicoes'
