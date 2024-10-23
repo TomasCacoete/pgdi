@@ -2,45 +2,52 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, blank=True)
+
+    USER_TYPES = [
+        ('contestant', 'Contestant'),
+        ('creator', 'Creator'),
+        ]
+    
+    user_type = models.CharField(max_length=10, choices=USER_TYPES,blank=True, default='contestant') #pode ser omitido mas se pretender ser creator tem de passar parametro
 
     def __str__(self):
-        return self.name
+        return self.username
     
 
 class Contestant(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Contestant: {self.user.name}"
+        return f"Contestant: {self.user.username}"
 
 class Creator(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"Creator: {self.user.name}"
-
-
+        return f"Creator: {self.user.username}"
+    
+    
 class Route(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50, blank=True)
+    creator=models.ForeignKey(Creator, on_delete=models.CASCADE)    
+    file=models.FileField(upload_to='routes/')
 
-    def __str__(self):
-        return self.name
-    
-
-class Submission(models.Model):
-    route_id = models.ForeignKey(Route, on_delete=models.CASCADE)
-    contestant_id = models.ForeignKey(Contestant, on_delete=models.CASCADE)
-    
 
 class Competition(models.Model):
-    id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=50)
-    start_date = models.DateTimeField()
-    end_date = models.DateTimeField()
+    name=models.CharField(max_length=50)
+    start_date=models.DateTimeField()
+    end_date=models.DateTimeField()
+    creator = models.ForeignKey(Creator, on_delete=models.CASCADE)
     routes = models.ManyToManyField(Route)
-    
+
     def __str__(self):
         return self.name
+        
+        
+class Submission(models.Model):
+    file=models.FileField(upload_to='submissions/')
+    contestant=models.ForeignKey(Contestant, on_delete=models.CASCADE)
+    competition=models.ForeignKey(Competition, on_delete=models.CASCADE)
+    score=models.FloatField()
+    
+    class Meta:
+        unique_together = ('contestant', 'competition')

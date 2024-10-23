@@ -5,3 +5,22 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
+        extra_kwargs = {
+            'password': {'write_only': True}
+        }
+        
+    def create(self, validated_data):
+        # Default user type is 'contestant' if not specified
+        user_type = self.context['request'].data.get('user_type', 'contestant').lower()
+        
+        # Create a base user
+        user = User.objects.create_user(**validated_data)
+
+        # Create specific type of user if needed
+        if user_type == 'contestant':
+            Contestant.objects.create(user=user)
+        elif user_type == 'creator':
+            Creator.objects.create(user=user)
+
+        return user
+
