@@ -94,3 +94,4 @@ stripe.sh
 env
 backend/mediafiles/
 .venv/
+backend/db.sqlite3
