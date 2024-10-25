@@ -6,4 +6,5 @@ from .views import *
 
 urlpatterns = [
     path('user/', CreateUser.as_view()),
+    path('get_users/', GetUsers.as_view()),
 ]
