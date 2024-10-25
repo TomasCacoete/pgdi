@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect, ReactNode } from "react";
 import {jwtDecode} from "jwt-decode";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 // Define interfaces for User and AuthTokens
 interface User {
@@ -8,6 +8,18 @@ interface User {
     username: string;
     id: number;
 }
+
+interface LoginSuccess {
+    access: string;
+    refresh: string;
+}
+
+interface LoginError {
+    detail: string; // Error message or response structure on login failure
+}
+
+type LoginResponse = LoginSuccess | LoginError;
+
 
 interface AuthTokens {
     access: string;
@@ -18,7 +30,7 @@ interface AuthTokens {
 interface AuthContextType {
     user: User | null;
     authTokens: AuthTokens | null;
-    loginUser: (username: string, password: string) => Promise<any>;
+    loginUser: (username: string, password: string) => Promise<LoginResponse>;
     logoutUser: () => void;
 }
 
@@ -32,24 +44,26 @@ interface AuthProviderProps {
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
-    let [authTokens, setAuthTokens] = useState<AuthTokens | null>(() => 
+    const [authTokens, setAuthTokens] = useState<AuthTokens | null>(() => 
         localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')!) : null
     );
-    let [user, setUser] = useState<User | null>(() => 
+    const [user, setUser] = useState<User | null>(() => 
         localStorage.getItem('authTokens') ? jwtDecode<User>(localStorage.getItem('authTokens')!) : null
     );
-    let [loading, setLoading] = useState(true);
-    const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
+    //const navigate = useNavigate();
 
-    let loginUser = async (username: string, password: string) => {
-        let response = await fetch(process.env.REACT_APP_BACKEND + '/auth/login/', {
+
+
+    const loginUser = async (username: string, password: string) => {
+        const response = await fetch('http://127.0.0.1:8000/auth/login/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ 'username': username, 'password': password })
         });
-        let data = await response.json();
+        const data = await response.json();
 
         if (response.status === 200) {
             setAuthTokens(data);
@@ -59,31 +73,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             localStorage.setItem("user_type", decodedToken.user_type);
             localStorage.setItem("username", decodedToken.username);
             localStorage.setItem("user_id", (decodedToken.id).toString());
-            navigate("/");
+            //navigate("/");
         } else {
             return data;
         }
     };
 
-    let logoutUser = () => {
+    const logoutUser = () => {
         setAuthTokens(null);
         setUser(null);
         localStorage.removeItem('authTokens');
         localStorage.removeItem('user_type');
         localStorage.removeItem('username');
         localStorage.removeItem('user_id');
-        navigate("/");
+        //navigate("/");
     };
 
-    let updateToken = async () => {
-        let response = await fetch(process.env.REACT_APP_BACKEND + '/auth/login/refresh/', {
+    const updateToken = async () => {
+        const response = await fetch('http://127.0.0.1:8000//auth/login/refresh/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ 'refresh': authTokens?.refresh })
         });
-        let data = await response.json();
+        const data = await response.json();
 
         if (response.status === 200) {
             setAuthTokens(data);
@@ -104,8 +118,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             updateToken();
         }
 
-        let fifteenMinutes = 1000 * 60 * 15;
-        let interval = setInterval(() => {
+        const fifteenMinutes = 1000 * 60 * 15;
+        const interval = setInterval(() => {
             if (authTokens) {
                 updateToken();
             }
@@ -113,7 +127,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return () => clearInterval(interval);
     }, [authTokens, loading]);
 
-    let contextData: AuthContextType = {
+    const contextData: AuthContextType = {
         user: user,
         authTokens: authTokens,
         loginUser: loginUser,
