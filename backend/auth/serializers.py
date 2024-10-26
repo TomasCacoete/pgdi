@@ -23,7 +23,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         
         return token
     
-class RegisterSerializer(serializers.ModelSerializer):
+class RegisterSerializer(serializers.ModelSerializer): #igual ao UserSerializer
     
     class Meta:
         model = User

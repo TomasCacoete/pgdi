@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import AuthContext from '../../auth/authContext';
 import './home.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
 
 interface FeatureProps {
   title: string;
@@ -33,6 +37,16 @@ const MenuItem: React.FC<MenuItemProps> = ({ icon, text }) => (
 const App: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const { authTokens } = useContext(AuthContext);
+
+  const headers = { // se nao conseguir ler token pagina nao renderiza
+    Authorization: `Bearer ${authTokens.access}`,
+  };
+
+  const {logoutUser} = useContext(AuthContext)
+
+  const navigate = useNavigate()
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -48,6 +62,24 @@ const App: React.FC = () => {
   const handleFindRoutes = (): void => {
     alert('Searching for nearby routes...');
   };
+
+  const getAllUsers = () => {
+
+    axios.get('http://127.0.0.1:8000/pgdi_api/get_users/', { headers })
+    .then(response => {
+        console.log(response.data);
+    })
+    .catch(error => {
+        console.error("Error fetching users:", error.response ? error.response.data : error.message);
+    });
+  }
+
+  const LogOut = () => {
+    logoutUser();
+    console.log('user logado')
+    navigate('/login')
+  }
+
 
   return (
     <div className="App">
@@ -73,6 +105,18 @@ const App: React.FC = () => {
           description="Explore popular cycling routes in your area."
           buttonText="Find Routes"
           onClick={handleFindRoutes}
+        />
+        <Feature
+          title="GetUsers"
+          description="getusers"
+          buttonText="get all users"
+          onClick={getAllUsers}
+        />
+        <Feature
+          title="Logout"
+          description="logout"
+          buttonText="logout"
+          onClick={LogOut}
         />
       </main>
       <div className={`bottom-menu ${isMenuOpen ? 'open' : ''}`}>

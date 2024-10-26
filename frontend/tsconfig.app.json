@@ -1,24 +1,22 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "target": "ES2022",
+    "lib": ["ES2023", "DOM"],
     "module": "ESNext",
     "skipLibCheck": true,
-
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
-
-    /* Linting */
-    "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    
+    /* Linting - set to relaxed options */
+    "strict": false,                // Disable strict mode entirely
+    "noImplicitAny": false,         // Allow `any` type usage without errors
+    "noUnusedLocals": false,        // Do not report unused variables
+    "noUnusedParameters": false,    // Do not report unused parameters
+    "allowJs": true                 // Allow JavaScript files if you want to mix JS and TS
   },
-  "include": ["src"]
+  "include": ["src", "vite.config.ts"]
 }

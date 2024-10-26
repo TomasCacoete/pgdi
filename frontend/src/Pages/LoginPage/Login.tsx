@@ -25,16 +25,15 @@ const Login = () => {
         try {
             const response = await loginUser(username, password); // Call loginUser with username and password
             if (response.status === 200) {
-              localStorage.setItem('authTokens', JSON.stringify(response.data));
-              // ... other success logic
-              navigate("/");
+                localStorage.setItem('authTokens', JSON.stringify(response.data));
+                // ... other success logic
+                navigate("/");
             } else {
-              console.log(response.detail); // Set error if status code is not 200
+                console.log(response.detail); // Set error if status code is not 200
             }
           } catch (error:any) {
-            
-            console.log("There was an internal error, please try again") // Generic error message for unexpected errors
-             // Log the actual error for debugging
+                console.log("There was an internal error, please try again",error) // Generic error message for unexpected errors
+                // Log the actual error for debugging
           }
     }
 
