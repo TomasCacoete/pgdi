@@ -1,0 +1,45 @@
+/* Center the container on the page */
+.file-upload-container {
+    display: inline-block;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    text-align: center;
+    margin-top: 50px;
+    width: 300px; /* Set a fixed width */
+}
+
+/* Style the header text */
+.file-upload-container h2 {
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    color: #333;
+}
+
+/* Style the file input */
+.file-upload-container input[type="file"] {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* Style the upload button */
+.file-upload-container button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.file-upload-container button:hover {
+    background-color: #0056b3;
+}
+
+/* Style the upload status message */
+.file-upload-container p {
+    margin-top: 15px;
+    color: #555;
+}
