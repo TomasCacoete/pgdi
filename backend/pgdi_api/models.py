@@ -1,5 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.core.exceptions import ValidationError
+
+
+def validate_gpx_file(file):
+    """Custom validator to check if the file has a .gpx extension."""
+    if not file.name.endswith('.gpx'):
+        raise ValidationError("Only .gpx files are allowed.")
 
 class User(AbstractUser):
     
@@ -9,7 +16,7 @@ class User(AbstractUser):
     
 class Route(models.Model):
     creator=models.ForeignKey(User, on_delete=models.CASCADE)    
-    file=models.FileField(upload_to='routes/')
+    file=models.FileField(upload_to='routes/', validators=[validate_gpx_file])
 
 
 class Competition(models.Model):
@@ -24,7 +31,7 @@ class Competition(models.Model):
         
         
 class Submission(models.Model):
-    file=models.FileField(upload_to='submissions/')
+    file=models.FileField(upload_to='submissions/', validators=[validate_gpx_file])
     contestant=models.ForeignKey(User, on_delete=models.CASCADE)
     competition=models.ForeignKey(Competition, on_delete=models.CASCADE)
     score=models.FloatField()

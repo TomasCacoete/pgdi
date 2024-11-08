@@ -80,6 +80,10 @@ const App: React.FC = () => {
     navigate('/')
   }
 
+  const handleUpload = () => {
+    navigate('/upload')
+  }
+
 
   return (
     <div className="App">
@@ -117,6 +121,12 @@ const App: React.FC = () => {
           description="logout"
           buttonText="logout"
           onClick={LogOut}
+        />
+        <Feature
+          title="Upload GPX File"
+          description="upload"
+          buttonText="upload"
+          onClick={handleUpload}
         />
       </main>
       <div className={`bottom-menu ${isMenuOpen ? 'open' : ''}`}>
