@@ -18,7 +18,6 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token = super().get_token(user)
 
         token['username'] = user.username
-        token['user_type'] = user.user_type
         token['id'] = user.id
         
         return token
@@ -33,16 +32,8 @@ class RegisterSerializer(serializers.ModelSerializer): #igual ao UserSerializer
         }
         
     def create(self, validated_data):
-        # Default user type is 'contestant' if not specified
-        user_type = self.context['request'].data.get('user_type', 'contestant').lower()
         
         # Create a base user
-        user = User.objects.create_user(**validated_data)
-
-        # Create specific type of user if needed
-        if user_type == 'contestant':
-            Contestant.objects.create(user=user)
-        elif user_type == 'creator':
-            Creator.objects.create(user=user)
+        user=User.objects.create_user(**validated_data)
 
         return user

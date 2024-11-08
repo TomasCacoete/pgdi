@@ -14,6 +14,7 @@ def get_username_from_token(token):
 
         # Access the username from the decoded token
         username = decoded_token['username']
+        id = decoded_token['id']
 
         return decoded_token, username
     except Exception as e:
