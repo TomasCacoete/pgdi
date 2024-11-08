@@ -38,6 +38,7 @@ class Competition(models.Model):
     end_date=models.DateTimeField()
     creator = models.ForeignKey(Creator, on_delete=models.CASCADE)
     routes = models.ManyToManyField(Route)
+    constestants = models.ManyToManyField(User)
 
     def __str__(self):
         return self.name
