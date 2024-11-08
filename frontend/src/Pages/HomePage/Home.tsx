@@ -77,7 +77,7 @@ const App: React.FC = () => {
   const LogOut = () => {
     logoutUser();
     console.log('user logado')
-    navigate('/login')
+    navigate('/')
   }
 
 
