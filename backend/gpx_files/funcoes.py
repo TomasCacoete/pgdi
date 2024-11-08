@@ -11,6 +11,7 @@ medioFondo_Activity = "C:/ProjetoPGDI/pgdi/backend/gpx_files/Mediofondo.gpx"
 treino = "C:/ProjetoPGDI/pgdi/backend/gpx_files/Volta_de_bicicleta_matinal.gpx"
 mira = "C:/ProjetoPGDI/pgdi/backend/gpx_files/Coimbra_Tocha_Mira_Coimbra.gpx"
 luso = "C:/ProjetoPGDI/pgdi/backend/gpx_files/Luso.gpx"
+subida = "C:/ProjetoPGDI/pgdi/backend/gpx_files/Subida_Rompe_Pernas.gpx"
 
 
 # Opens and Loads a GPX file
@@ -46,7 +47,6 @@ def calculate_inclination(point1, point2):
         inclination_percentage = (elevation_diff / distance) * 100
     else:
         inclination_percentage = 0
-    
     return inclination_percentage
 
 #Calculate the speed
