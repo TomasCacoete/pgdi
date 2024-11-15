@@ -24,3 +24,8 @@ class UserSerializer(serializers.ModelSerializer):
 
         return user
 
+class CompetitionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Competition
+        fields = ['id', 'name', 'start_date', 'end_date', 'creator', 'routes']
+        read_only_fields = ['id']
