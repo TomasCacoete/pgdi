@@ -26,38 +26,34 @@ class GetUsers(APIView):
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
     
- 
-#@permission_classes[IsAuthenticated]
+
+@permission_classes([IsAuthenticated])
 class CreateRoute(APIView):
-    
+    permission_classes = [IsAuthenticated]
+
     def post(self, request):
-        # Extract token from the Authorization header
         auth_header = request.headers.get("Authorization")
-        
         if not auth_header:
             return Response({"error": "Authorization header missing"}, status=status.HTTP_401_UNAUTHORIZED)
-        
+
         try:
-            # Decode and get the user from the token
             access_token = auth_header.split(" ")[1]
             user = get_user_from_token(access_token)
         except AuthenticationFailed as e:
             return Response({"error": str(e)}, status=status.HTTP_401_UNAUTHORIZED)
-        
-        # Get the GPX file from the request
-        gpx_file = request.FILES.get('gpx_file')
-        
+
+        # Get the GPX file
+        gpx_file = request.FILES.get('file')  # Match 'file' with FormData key
+
         if not gpx_file:
-            return Response({"error": "No GPX file provided"}, status=status.HTTP_400_BAD_REQUEST)
-        
-        # Call the RouteSerializer with the data
+            return Response({"error": "No file provided"}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Serialize data
         route_serializer = RouteSerializer(data={'creator': user.id, 'file': gpx_file})
-        
-        # Check if the serializer is valid
+
         if route_serializer.is_valid():
-            # Save the validated data to create a Route
             route_serializer.save()
             return Response(route_serializer.data, status=status.HTTP_201_CREATED)
         
-        # If the serializer is not valid, return the errors
+        print(route_serializer.errors)
         return Response(route_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
