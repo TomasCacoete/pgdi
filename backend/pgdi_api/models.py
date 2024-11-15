@@ -30,6 +30,7 @@ class Creator(models.Model):
 class Route(models.Model):
     creator=models.ForeignKey(Creator, on_delete=models.CASCADE)    
     file=models.FileField(upload_to='routes/')
+    name=models.CharField(max_length=50)
 
 
 class Competition(models.Model):
