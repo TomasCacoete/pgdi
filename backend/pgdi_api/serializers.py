@@ -22,10 +22,10 @@ class RouteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Route
         fields = '__all__'
+
         
 class CompetitionSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Competition
-        fields = ['id', 'name', 'start_date', 'end_date', 'creator', 'routes']
-        read_only_fields = ['id']
+        fields = '__all__'

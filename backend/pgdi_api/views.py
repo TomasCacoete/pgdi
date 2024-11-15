@@ -58,6 +58,22 @@ class CreateRoute(APIView):
         print(route_serializer.errors)
         return Response(route_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+class UserRoutes(APIView):
+    
+    def get(self, request):
+        auth_header = request.headers.get("Authorization")
+        if not auth_header:
+            return Response({"error": "Authorization header missing"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        try:
+            access_token = auth_header.split(" ")[1]
+            user = get_user_from_token(access_token)
+        except AuthenticationFailed as e:
+            return Response({"error": str(e)}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        routes = Route.objects.filter(creator=user)
+        serializer = RouteSerializer(routes, many=True)
+        return Response(serializer.data)
 
 class CompetitionCreationView(APIView):
     def post(self, request):
@@ -74,14 +90,8 @@ class CompetitionCreationView(APIView):
         except AuthenticationFailed as e:
             return Response({"error": str(e)}, status=status.HTTP_401_UNAUTHORIZED)
         
-        # Check if the user is a creator
-        try:
-            creator = User.objects.get(user=user)
-        except User.DoesNotExist:
-            return Response({"error": "User not found"}, status=status.HTTP_403_FORBIDDEN)
-        
         # Add creator to the request data
-        request.data['creator'] = creator.id
+        request.data['creator'] = user.id
         
         # Serialize the data
         serializer = CompetitionSerializer(data=request.data)
@@ -89,14 +99,29 @@ class CompetitionCreationView(APIView):
         if serializer.is_valid():
             competition = serializer.save()
             
-            # Handle routes if provided
-            routes = request.data.get('routes', [])
-            if routes:
-                competition.routes.set(routes)
+            # Handle routes: validate and associate
+            route_ids = request.data.get('routes', [])
+            if route_ids:
+                # Validate the route IDs by ensuring they belong to the user
+                user_routes = Route.objects.filter(creator=user, id__in=route_ids)
+                if user_routes.count() != len(route_ids):
+                    return Response(
+                        {"error": "One or more routes are invalid or do not belong to the user"},
+                        status=status.HTTP_400_BAD_REQUEST
+                    )
+                competition.routes.set(user_routes)
             
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class GetCompetitions(APIView):
+    
+    def get(self, request):
+        competitions = Competition.objects.all()
+        serializer = CompetitionSerializer(competitions, many=True)
+        return Response(serializer.data)
     
 
 class CompetitionSignUpView(APIView):
