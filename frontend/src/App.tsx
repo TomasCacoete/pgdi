@@ -1,13 +1,15 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './auth/authContext';
 
+import LandingPage from './pages/LandingPage/LandingPage';
+
 function App()  {
   return (
     <>
       <Router>
         <AuthProvider>
             <Routes>
-              <Route path="/" element={<div>Ola</div>}/>
+              <Route path="/" element={<LandingPage/>}/>
             </Routes>
         </AuthProvider>
       </Router>
