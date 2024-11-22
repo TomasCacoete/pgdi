@@ -29,3 +29,15 @@ class CompetitionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Competition
         fields = '__all__'
+        
+class SubmissionSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Submission
+        fields = '__all__'
+        
+class UserCompetitionSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User_Competition
+        fields = '__all__'

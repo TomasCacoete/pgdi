@@ -5,6 +5,7 @@ import Login from './Pages/LoginPage/Login';
 import UPLOAD from './Pages/FileUpload/uploadFile.tsx'
 import Competition from './Pages/CompetitonCreation/competition.tsx'
 import CompetitionSignUp from './Pages/CompetitionSignUp/competitionSignUp.tsx'
+import CompetitionSubmission from './Pages/submission/submission.tsx'
 
 function App()  {
   return (
@@ -17,6 +18,7 @@ function App()  {
             <Route path="/upload" element={<UPLOAD/>} />
             <Route path='/competition' element={<Competition/>}/>
             <Route path='/signUp_competition' element={<CompetitionSignUp/>}/>
+            <Route path='/submission' element={<CompetitionSubmission/>}/>
           </Routes>
         </AuthProvider>
       </Router>

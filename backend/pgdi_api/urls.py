@@ -11,4 +11,6 @@ urlpatterns = [
     path('create_competition/', CompetitionCreationView.as_view()),
     path('competitions/', GetCompetitions.as_view()),
     path('competition_signup/', CompetitionSignUpView.as_view()),
+    path('user_competitions/', userCompetitions.as_view()),
+    path('upload_submission/', uploadSubmission.as_view()),
 ]

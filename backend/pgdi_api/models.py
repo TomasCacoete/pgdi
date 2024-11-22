@@ -31,7 +31,7 @@ class Competition(models.Model):
 class User_Competition(models.Model): #table to connect directly user to an competition
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     competition = models.ForeignKey(Competition, on_delete=models.CASCADE)
-    score = models.FloatField(blank=True)
+    score = models.FloatField(blank=True, default=0.0)
 
     class Meta:
         unique_together = ('user', 'competition')
@@ -40,7 +40,6 @@ class Submission(models.Model):
     file=models.FileField(upload_to='submissions/', validators=[validate_gpx_file])
     contestant=models.ForeignKey(User, on_delete=models.CASCADE)
     competition=models.ForeignKey(Competition, on_delete=models.CASCADE)
-    score=models.FloatField()
     
     class Meta:
         unique_together = ('contestant', 'competition')
