@@ -5,7 +5,7 @@ import Login from './Pages/LoginPage/Login';
 import UPLOAD from './Pages/FileUpload/uploadFile.tsx'
 import Competition from './Pages/CompetitonCreation/competition.tsx'
 import CompetitionSignUp from './Pages/CompetitionSignUp/competitionSignUp.tsx'
-import CompetitionSubmission from './Pages/submission/submission.tsx'
+import CompetitionSubmission from './Pages/CompetitionSubmission/submission.tsx'
 
 function App()  {
   return (
