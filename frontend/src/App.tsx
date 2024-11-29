@@ -7,13 +7,15 @@ import Competition from './Pages/CompetitonCreation/competition.tsx'
 import CompetitionSignUp from './Pages/CompetitionSignUp/competitionSignUp.tsx'
 import CompetitionSubmission from './Pages/CompetitionSubmission/submission.tsx'
 
+import LoginMobile from './Mobile/LoginPageMobile/Login.tsx';
+
 function App()  {
   return (
     <>
       <Router>
         <AuthProvider>
           <Routes>
-            <Route path="/" element={<Login />} />
+            <Route path="/" element={<LoginMobile />} />
             <Route path="/home" element={<Home />} />
             <Route path="/upload" element={<UPLOAD/>} />
             <Route path='/competition' element={<Competition/>}/>
