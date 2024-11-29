@@ -7,7 +7,9 @@ import Competition from './Pages/CompetitonCreation/competition.tsx'
 import CompetitionSignUp from './Pages/CompetitionSignUp/competitionSignUp.tsx'
 import CompetitionSubmission from './Pages/CompetitionSubmission/submission.tsx'
 
-import LoginMobile from './Mobile/LoginPageMobile/Login.tsx';
+import LoginMobile from './Mobile/LoginPageMobile/LoginMobile.tsx';
+import UploadRoutesMobile from './Mobile/UserUploadRoutes/UploadRoutesMobile.tsx';
+import CompetitionsMobile from './Mobile/MobileCompetitions/MobileCompetitions.tsx';
 
 function App()  {
   return (
@@ -17,8 +19,8 @@ function App()  {
           <Routes>
             <Route path="/" element={<LoginMobile />} />
             <Route path="/home" element={<Home />} />
-            <Route path="/upload" element={<UPLOAD/>} />
-            <Route path='/competition' element={<Competition/>}/>
+            <Route path="/upload" element={<UploadRoutesMobile/>} />
+            <Route path='/competition' element={<CompetitionsMobile/>}/>
             <Route path='/signUp_competition' element={<CompetitionSignUp/>}/>
             <Route path='/submission' element={<CompetitionSubmission/>}/>
           </Routes>

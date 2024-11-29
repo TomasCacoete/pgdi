@@ -2,7 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../../auth/authContext';
 import './LoginMobile.css';
-import Logo from '../../assets/tour-dash.svg';
+import Logo from '../../assets/logo.svg'
 
 const Login = () => {
     const [username, setUsername] = useState('');

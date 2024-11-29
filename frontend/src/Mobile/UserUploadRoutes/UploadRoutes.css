@@ -1,0 +1,119 @@
+@media only screen and (max-width: 450px) {
+
+    .file-upload-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between; /* Ensure space between elements */
+        width: 100%;
+        height: 100vh;
+        padding-bottom: 5rem; /* Adjust padding to accommodate the navbar */
+    }
+
+    .logo-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 5%;
+        position: absolute;
+        top: 0;
+        margin-top: 3rem;
+    }
+
+    .info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        height: 25%;
+        font-weight: 500;
+        font-size: 1.5rem;
+        color: #1F75FE;
+    }
+
+    .upload-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        height: 30%;
+        border: 1px solid #1F75FE;
+        border-radius: 15%;
+        box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+        margin-top: -3rem;
+    }
+
+    .header-upload {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        height: 10%;
+        font-weight: 500;
+        font-size: 1.5rem;
+        padding-top: 1rem;
+    }
+
+    .main-upload {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+        flex: 1;
+    }
+
+    .input-file {
+        width: 100%;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        border: 1px solid #1F75FE;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: white;
+        color: #1F75FE;
+        font-size: 1rem;
+    }
+
+    .button-upload {
+        width: 100%;
+        padding: 0.5rem;
+        margin: 0.5rem 0;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #1F75FE;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .button-upload:hover {
+        background-color: #155ab6;
+    }
+
+    .create-gpx-site {
+        text-align: center;
+        position: relative;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .create-gpx-site p {
+        margin: 0.5rem 0;
+    }
+
+    .create-gpx-site a {
+        color: #1F75FE;
+        text-decoration: none;
+    }
+
+    .create-gpx-site a:hover {
+        text-decoration: underline;
+    }
+}

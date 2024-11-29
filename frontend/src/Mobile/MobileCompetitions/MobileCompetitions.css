@@ -1,0 +1,105 @@
+@media only screen and (max-width: 450px) {
+
+    .competition-signup-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100vh;
+        padding: 1rem;
+    }
+
+    .competition-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        position: absolute;
+        top: 3rem;
+    }
+
+    .competition-signup-header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        width: 100%;
+        height: 6%;
+        font-weight: 500;
+        font-size: 1.5rem;
+        color: #1F75FE;
+    }
+
+    .competition-signup-header h1 {
+        color: #1F75FE;
+        font-size: 1.8rem;
+    }
+
+    .status-message {
+        color: red;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .competitions-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 60%;
+        gap: 1rem;
+        margin-top: 3rem;
+    }
+
+    .competition-list {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+
+    .competition-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 90%;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: 1px solid #1F75FE;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
+
+    .competition-item h3 {
+        color: #1F75FE;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .competition-item p {
+        color: #333;
+        font-size: 1rem;
+        margin: 0.5rem 0;
+    }
+
+    .competition-item button {
+        width: 80%;
+        padding: 0.5rem;
+        margin-top: 1rem;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        background-color: #1F75FE;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    .competition-item button:hover {
+        background-color: #155ab6;
+    }
+}
