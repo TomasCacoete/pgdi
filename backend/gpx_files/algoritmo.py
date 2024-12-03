@@ -2,7 +2,7 @@ import funcoes
 import statistics
 import numpy as np
 import cheating
-#import strava2gpx
+import times
 
 
 activity_gpx_file = funcoes.subida
@@ -12,7 +12,6 @@ predefined_route_file = funcoes.subida
 def check_first_point(point, activity_points, threshold_first_point = 20):
     for i in range(1,len(activity_points)):
         if funcoes.calculate_distance(point, activity_points[i]) <= threshold_first_point:
-            print("Início ",i)
             return i
     return  False
 
@@ -20,7 +19,6 @@ def check_first_point(point, activity_points, threshold_first_point = 20):
 def check_last_point(point, activity_points, primeiro_ponto, threshold_first_point = 20):
     for i in range(len(activity_points)-1,primeiro_ponto, -1):
         if funcoes.calculate_distance(point, activity_points[i]) <= threshold_first_point:
-            print("Fim ",i)
             return i
     return  False
 
@@ -37,7 +35,7 @@ def activity_checker(activity_points,route_points, threshold_distance=50):
     begin = check_first_point(route_points[0], activity_points)
     end = check_last_point(route_points[-1], activity_points, begin)
     if begin and end:
-        print("Entrou")
+
         #First point of the activity, because it is always needed 2 points to calculate speed and inclination
         for j in range(1,len(route_points)-1):
             for k in range(begin,begin+100):
@@ -55,7 +53,6 @@ def activity_checker(activity_points,route_points, threshold_distance=50):
 # Calculate the matched points percentage and Check if the minimum is met
 def check_minimum_matched_points_percentage(matched_points,route_points,minimum_matched_points_percentage = 95 ):
     a = (matched_points / route_points * 100) 
-    print(a)
     return a > minimum_matched_points_percentage
 
 
@@ -91,10 +88,17 @@ def check_route_passage(activity_gpx_file, predefined_route_file):
         print(f"Minimum inclination: {min(inclinations[:]):.2f}%")
         print(f"Average speed: {statistics.mean(speeds[:]):.2f} km/h")
         print(f"Maximum speed: {max(speeds[:]):.2f} km/h")
-        return True
+
+        sprint_time, kom_times = times.take_segments_times(funcoes.subida, activity_points)
+        print(sprint_time, kom_times)
+
+        total_time = funcoes.calculate_time(activity_points[0], activity_points[-1])
+        print(total_time)
+        return total_time
     else:
         print("The activity did not pass through the predefined route. ",matched_points)
-        return False
+        total_time = None
+        return total_time
 
 
 check_route_passage(activity_gpx_file, predefined_route_file)

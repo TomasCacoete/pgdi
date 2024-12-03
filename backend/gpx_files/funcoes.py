@@ -34,6 +34,14 @@ def calculate_distance(point1, point2):
         (point2.latitude, point2.longitude)
     ).meters
 
+#Calculate distance between two points
+def calculate_difference_of_altitudes(point1, point2):
+    return abs(point1.elevation - point2.elevation)
+
+def calculate_time(point1, point2):
+    # Calculate speed in km/h
+    return (point2.time - point1.time).total_seconds()
+
 #Calculate the inclination as a percentage
 def calculate_inclination(point1, point2):
     # Calculate horizontal distance
