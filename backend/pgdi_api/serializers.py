@@ -16,8 +16,28 @@ class UserSerializer(serializers.ModelSerializer):
 
         return user
 
+    
+class RouteSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Route
+        fields = '__all__'
+
+        
 class CompetitionSerializer(serializers.ModelSerializer):
+    
     class Meta:
         model = Competition
-        fields = ['id', 'name', 'start_date', 'end_date', 'creator', 'routes']
-        read_only_fields = ['id']
+        fields = '__all__'
+        
+class SubmissionSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Submission
+        fields = '__all__'
+        
+class UserCompetitionSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = User_Competition
+        fields = '__all__'

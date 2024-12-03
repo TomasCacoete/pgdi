@@ -2,21 +2,28 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './auth/authContext';
 import Home from './Pages/HomePage/Home.tsx';
 import Login from './Pages/LoginPage/Login';
-import MapsPage from './Pages/Maps_API_Tests/maps.tsx';
-import { APIProvider } from '@vis.gl/react-google-maps';
+import UPLOAD from './Pages/FileUpload/uploadFile.tsx'
+import Competition from './Pages/CompetitonCreation/competition.tsx'
+import CompetitionSignUp from './Pages/CompetitionSignUp/competitionSignUp.tsx'
+import CompetitionSubmission from './Pages/CompetitionSubmission/submission.tsx'
+
+import LoginMobile from './Mobile/LoginPageMobile/LoginMobile.tsx';
+import UploadRoutesMobile from './Mobile/UserUploadRoutes/UploadRoutesMobile.tsx';
+import CompetitionsMobile from './Mobile/MobileCompetitions/MobileCompetitions.tsx';
 
 function App()  {
   return (
     <>
       <Router>
         <AuthProvider>
-          <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-            <Routes>
-              <Route path="/" element={<Login />} />
-              <Route path="/home" element={<Home />} />
-              <Route path="/map" element={<MapsPage />} />
-            </Routes>
-          </APIProvider>
+          <Routes>
+            <Route path="/" element={<LoginMobile />} />
+            <Route path="/home" element={<Home />} />
+            <Route path="/upload" element={<UploadRoutesMobile/>} />
+            <Route path='/competition' element={<CompetitionsMobile/>}/>
+            <Route path='/signUp_competition' element={<CompetitionSignUp/>}/>
+            <Route path='/submission' element={<CompetitionSubmission/>}/>
+          </Routes>
         </AuthProvider>
       </Router>
     </>
