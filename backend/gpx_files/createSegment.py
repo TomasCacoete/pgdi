@@ -85,8 +85,8 @@ def create_segments(gpx):
     # Get Coordinates from the activity and the predefined route
     activity_points = funcoes.extract_coordinates(activity_gpx)
 
-    array_sprint = start_sprint(activity_points)
+    sprint = start_sprint(activity_points)
     array_subidas = start_KOM(activity_points)
 
-    return array_sprint, array_subidas
+    return sprint, array_subidas
 

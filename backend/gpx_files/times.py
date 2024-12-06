@@ -25,8 +25,10 @@ def take_segments_times(gpx, activity_points):
 
     sprint_time = take_time(array_sprint, activity_points)
     kom_times = []
+    kom_categories = []
 
     for i in array_subidas:
         kom_times.append(take_time(i, activity_points))
+        kom_categories.append(i[2])
     
-    return sprint_time, kom_times
+    return sprint_time, kom_times, kom_categories

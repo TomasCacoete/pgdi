@@ -89,12 +89,11 @@ def check_route_passage(activity_gpx_file, predefined_route_file):
         print(f"Average speed: {statistics.mean(speeds[:]):.2f} km/h")
         print(f"Maximum speed: {max(speeds[:]):.2f} km/h")
 
-        sprint_time, kom_times = times.take_segments_times(funcoes.subida, activity_points)
-        print(sprint_time, kom_times)
+        sprint_time, kom_times, kom_categories = times.take_segments_times(funcoes.subida, activity_points)
+
 
         total_time = funcoes.calculate_time(activity_points[0], activity_points[-1])
-        print(total_time)
-        return total_time
+        return total_time, sprint_time, kom_times, kom_categories
     else:
         print("The activity did not pass through the predefined route. ",matched_points)
         total_time = None
