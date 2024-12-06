@@ -10,6 +10,10 @@ import CompetitionSubmission from './Pages/CompetitionSubmission/submission.tsx'
 import LoginMobile from './Mobile/LoginPageMobile/LoginMobile.tsx';
 import UploadRoutesMobile from './Mobile/UserUploadRoutes/UploadRoutesMobile.tsx';
 import CompetitionsMobile from './Mobile/MobileCompetitions/MobileCompetitions.tsx';
+import CreateCompetitionsMobile from './Mobile/CreateCompetitionsMobile/CreateCompetitionsMobile.tsx';
+import CompetitionSubmissonsMobile from './Mobile/CompetitionsSubmissions/CompetitionSubmissions.tsx';
+import RegisterMobile from './Mobile/RegisterMobile/Register.tsx';
+
 
 function App()  {
   return (
@@ -22,7 +26,9 @@ function App()  {
             <Route path="/upload" element={<UploadRoutesMobile/>} />
             <Route path='/competition' element={<CompetitionsMobile/>}/>
             <Route path='/signUp_competition' element={<CompetitionSignUp/>}/>
-            <Route path='/submission' element={<CompetitionSubmission/>}/>
+            <Route path='/submission' element={<CompetitionSubmissonsMobile/>}/>
+            <Route path='/create_competition' element={<CreateCompetitionsMobile/>}/>
+            <Route path="/register" element={<RegisterMobile/>} />
           </Routes>
         </AuthProvider>
       </Router>

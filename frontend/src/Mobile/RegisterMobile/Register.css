@@ -1,0 +1,61 @@
+
+
+.RegisterContainer {
+    width: 450px;
+    height: auto;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.inputbox {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.inputboxes {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #1f75fe;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.button-register {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #1f75fe;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-register:hover {
+    background-color: #155ab6;
+}
+
+.status-message {
+    color: red;
+    font-size: 0.875rem;
+    text-align: center;
+}
