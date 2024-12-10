@@ -28,7 +28,6 @@ const Login = () => {
             const response = await loginUser(username, password);
             if (response.status === 200) {
                 localStorage.setItem('authTokens', JSON.stringify(response.data));
-                navigate('/home');
             } else {
                 console.log(response.detail);
             }
