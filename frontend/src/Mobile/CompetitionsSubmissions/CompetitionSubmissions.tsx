@@ -74,7 +74,7 @@ const MyCompetitions: React.FC = () => {
     return (
         <div className="my-competitions-container">
             <div className="logo"> <img src={Logo}></img> </div>
-            <div className="header">My Competitions</div>
+            <div className="header-comp">My Competitions</div>
             {statusMessage && <p className="status-message">{statusMessage}</p>}
             <div className="competition-list">
                 {competitions.map((competition) => (

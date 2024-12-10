@@ -5,6 +5,7 @@ from .models import *
 from .views import *
 
 urlpatterns = [
+    path('user/', UserInformation.as_view()),
     path('get_users/', GetUsers.as_view()),
     path('create_route/',CreateRoute.as_view()),
     path('user_routes/', UserRoutes.as_view()),

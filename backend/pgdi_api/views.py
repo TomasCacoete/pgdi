@@ -27,6 +27,22 @@ class GetUsers(APIView):
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
     
+@permission_classes([IsAuthenticated])
+class UserInformation(APIView):
+    
+    def get(self, request):
+        auth_header = request.headers.get("Authorization")
+        if not auth_header:
+            return Response({"error": "Authorization header missing"}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        try:
+            access_token = auth_header.split(" ")[1]
+            user = get_user_from_token(access_token)
+        except AuthenticationFailed as e:
+            return Response({"error": str(e)}, status=status.HTTP_401_UNAUTHORIZED)
+        
+        serializer = UserSerializer(user)
+        return Response(serializer.data)
 
 @permission_classes([IsAuthenticated])
 class CreateRoute(APIView):

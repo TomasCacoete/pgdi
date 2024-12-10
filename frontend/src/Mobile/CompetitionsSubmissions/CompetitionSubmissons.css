@@ -6,6 +6,8 @@
         height: 100vh;
         margin-bottom: 2rem;
         overflow-y: auto;
+        background-color: whitesmoke;
+
     }
 
     .logo {
@@ -17,16 +19,17 @@
         margin-top: 0.5rem;
     }
 
-    .header {
+    .header-comp {
         width: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
         margin-top: 1rem;
         margin-bottom: 2rem;
-        font-size: larger;
         font-weight: 600;
-        color: #1f75fe; 
+        font-size: 1.5rem;
+        color: #1F75FE;
+        font-size: 1.5rem;
     }
 
     .competition-list {

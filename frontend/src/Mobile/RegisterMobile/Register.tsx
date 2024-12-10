@@ -28,10 +28,10 @@ const Register = () => {
     // Handle registration
     const handleRegister = async () => {
         try {
-            const response = await axios.post('http://127.0.0.1:8000/pgdi_api/register/', formData);
+            const response = await axios.post('http://127.0.0.1:8000/auth/register/', formData);
             if (response.status === 201) {
                 setStatusMessage('Registration successful! Redirecting to login...');
-                setTimeout(() => navigate('/login'), 2000); // Redirect to login after 2 seconds
+                setTimeout(() => navigate('/'), 2000); 
             } else {
                 setStatusMessage('Registration failed. Please try again.');
             }
@@ -48,7 +48,7 @@ const Register = () => {
             <div className="logo">
                 <img src={Logo} alt="Logo" />
             </div>
-            <div className="Main">
+            <div className="MainRegister">
                 {statusMessage && <p className="status-message">{statusMessage}</p>}
                 <div className="inputbox">
                     <label>Username</label>

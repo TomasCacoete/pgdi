@@ -13,7 +13,7 @@ import CompetitionsMobile from './Mobile/MobileCompetitions/MobileCompetitions.t
 import CreateCompetitionsMobile from './Mobile/CreateCompetitionsMobile/CreateCompetitionsMobile.tsx';
 import CompetitionSubmissonsMobile from './Mobile/CompetitionsSubmissions/CompetitionSubmissions.tsx';
 import RegisterMobile from './Mobile/RegisterMobile/Register.tsx';
-
+import UserPage from './Mobile/UserPage/UserPage.tsx';
 
 function App()  {
   return (
@@ -25,10 +25,10 @@ function App()  {
             <Route path="/home" element={<Home />} />
             <Route path="/upload" element={<UploadRoutesMobile/>} />
             <Route path='/competition' element={<CompetitionsMobile/>}/>
-            <Route path='/signUp_competition' element={<CompetitionSignUp/>}/>
             <Route path='/submission' element={<CompetitionSubmissonsMobile/>}/>
             <Route path='/create_competition' element={<CreateCompetitionsMobile/>}/>
             <Route path="/register" element={<RegisterMobile/>} />
+            <Route path="/user" element={<UserPage />} />
           </Routes>
         </AuthProvider>
       </Router>
