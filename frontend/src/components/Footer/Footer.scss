@@ -1,0 +1,12 @@
+@use '../../styles/variables.scss' as *;
+@use '../../styles/mixin.scss' as *;
+
+.footer {
+    padding: 3rem;
+
+    background-color: $main-blue;
+
+    text-align: center;
+    color: $main-white;
+    font-family: $font-family;
+}
