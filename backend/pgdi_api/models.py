@@ -7,8 +7,7 @@ from django.db.models import F
 from django.db.models.functions import Rank
 from django.db.models.expressions import Window
 
-import backend.gpx_files.createSegment as createSegment
-import backend.gpx_files.algoritmo as algoritmo
+from pgdi_api import algoritmo as algoritmo
 
 class User(AbstractUser):
     
