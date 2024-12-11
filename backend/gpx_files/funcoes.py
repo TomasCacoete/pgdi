@@ -34,10 +34,11 @@ def calculate_distance(point1, point2):
         (point2.latitude, point2.longitude)
     ).meters
 
-#Calculate distance between two points
+#Calculate altitude between two points
 def calculate_difference_of_altitudes(point1, point2):
     return abs(point1.elevation - point2.elevation)
 
+#Calculate time between two points
 def calculate_time(point1, point2):
     # Calculate speed in km/h
     return (point2.time - point1.time).total_seconds()

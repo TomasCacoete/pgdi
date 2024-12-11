@@ -4,18 +4,27 @@ import numpy as np
 import analisador
 import createSegment
 
-def take_time(array_sprint, activity_points):
+def take_time(array_sprint, activity_points, threshold_distance = 50):
     start = array_sprint[0]
     end = array_sprint[1]
 
+    # Find the first point within the threshold distance of the start point
     for a in activity_points:
-        if a == start:
-            start = a
-        if a == end:
+        distance = funcoes.calculate_distance(start, a)
+        if distance <= threshold_distance:
+            start = a   
+    
+    #Split the array activity_points from the start point = a, till the end of the array
+    half = [a for a in activity_points if a >= start] 
+
+    # Find the end point within the threshold distance of the end point
+    for a in half:
+        distance = funcoes.calculate_distance(end, a)
+        if distance <= threshold_distance:
             end = a
 
-    # Calculate speed in km/h
-    time_diff = (end.time - start.time).total_seconds()
+    # Calculate time in seconds
+    time_diff = funcoes.calculate_time(start, end)
 
     return time_diff
 
