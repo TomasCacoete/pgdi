@@ -1,0 +1,92 @@
+@media only screen and (max-width: 450px) {
+
+    .scoreboard-page {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 1rem;
+        background-color: #f5f5f5;
+    }
+
+    .logo-score {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .logo-score img {
+        width: 100px;
+        height: auto;
+    }
+
+    .header-scoreboard {
+        text-align: center;
+        margin-bottom: 1rem;
+        color: #1F75FE;
+        font-size: 1.8rem;
+    }
+
+    .status-message {
+        color: red;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .table-scoreboard {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        background-color: white;
+        border: 1px solid #1F75FE;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 1rem;
+    }
+
+    .scoreboard-item {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        padding: 0.5rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .scoreboard-upper {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        padding: 0.5rem;
+        border-bottom: 1px solid #ddd;
+        color: #1F75FE
+    }
+
+    .scoreboard-item:last-child {
+        border-bottom: none;
+    }
+
+    .scoreboard-item p {
+        margin: 0;
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .scoreboard-item .rank {
+        font-weight: bold;
+        color: #1F75FE;
+    }
+
+    .scoreboard-item .name {
+        flex: 1;
+        text-align: left;
+        margin-left: 1rem;
+    }
+
+    .scoreboard-item .score {
+        text-align: right;
+    }
+}

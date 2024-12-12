@@ -40,6 +40,7 @@ class Submission(models.Model):
     file=models.FileField(upload_to='submissions/', validators=[validate_gpx_file])
     contestant=models.ForeignKey(User, on_delete=models.CASCADE)
     competition=models.ForeignKey(Competition, on_delete=models.CASCADE)
+    overall_time = models.DurationField(null=True, blank=True)
     
     class Meta:
         unique_together = ('contestant', 'competition')

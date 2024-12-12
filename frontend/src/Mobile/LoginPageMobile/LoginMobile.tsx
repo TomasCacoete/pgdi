@@ -28,7 +28,6 @@ const Login = () => {
             const response = await loginUser(username, password);
             if (response.status === 200) {
                 localStorage.setItem('authTokens', JSON.stringify(response.data));
-                navigate('/home');
             } else {
                 console.log(response.detail);
             }
@@ -43,42 +42,40 @@ const Login = () => {
     };
 
     return (
-        <div className="Wrapper">
-            <div className="LoginContainer">
-                <div className="logo">
-                    <img src={Logo} alt="Logo" />
+        <div className="LoginContainer">
+            <div className="logo">
+                <img src={Logo} alt="Logo" />
+            </div>
+            <div className="Main">
+                <div className="usernamebox">
+                    <label className="login">Username</label>
+                    <input
+                        className="inputboxes"
+                        type="text"
+                        name="username"
+                        value={username}
+                        onChange={handleInput}
+                    />
                 </div>
-                <div className="Main">
-                    <div className="usernamebox">
-                        <label className="login">Username</label>
-                        <input
-                            className="inputboxes"
-                            type="text"
-                            name="username"
-                            value={username}
-                            onChange={handleInput}
-                        />
-                    </div>
-                    <div className="passwordbox">
-                        <label className="pass">Password</label>
-                        <input
-                            className="inputboxes"
-                            type="password"
-                            name="password"
-                            value={password}
-                            onChange={handleInput}
-                        />
-                    </div>
-                    <button className="button-login" onClick={handleLogin}>
-                        Login
-                    </button>
+                <div className="passwordbox">
+                    <label className="pass">Password</label>
+                    <input
+                        className="inputboxes"
+                        type="password"
+                        name="password"
+                        value={password}
+                        onChange={handleInput}
+                    />
                 </div>
-                <div className="register-text">
-                Register{' '}
-                <a onClick={handleRegisterRedirect} style={{ cursor: 'pointer'}}>
-                    here
-                </a>
-                </div>
+                <button className="button-login" onClick={handleLogin}>
+                    Login
+                </button>
+            </div>
+            <div className="register-text">
+            Register{' '}
+            <a onClick={handleRegisterRedirect} style={{ cursor: 'pointer'}}>
+                here
+            </a>
             </div>
         </div>
     );

@@ -5,6 +5,7 @@ import "./CompetitionSubmissons.css";
 
 import Navbar from "../Components/Navbar/Navbar";
 import Logo from "../../assets/logo2.svg";
+import { useNavigate } from "react-router-dom";
 
 const MyCompetitions: React.FC = () => {
     const [competitions, setCompetitions] = useState<any[]>([]);
@@ -12,6 +13,7 @@ const MyCompetitions: React.FC = () => {
     const [fileInputs, setFileInputs] = useState<{ [key: number]: File | null }>({});
 
     const { authTokens } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     // Fetch competitions where the user is signed up
     useEffect(() => {
@@ -71,6 +73,10 @@ const MyCompetitions: React.FC = () => {
         }
     };
 
+    const handleClassification = (competitionId: string) => {
+        navigate(`/scoreboard/${competitionId}`);
+    }
+
     return (
         <div className="my-competitions-container">
             <div className="logo"> <img src={Logo}></img> </div>
@@ -95,8 +101,10 @@ const MyCompetitions: React.FC = () => {
                                     accept=".gpx"
                                     onChange={(e) => handleFileChange(competition.id, e.target.files?.[0] || null)}
                                 />
+                                
                             </label>
                             <button onClick={() => handleFileSubmit(competition.id)}>Submit</button>
+                            <button onClick={() => handleClassification(competition.id)}>See Classifications</button>
                         </div>
                     </div>
                 ))}

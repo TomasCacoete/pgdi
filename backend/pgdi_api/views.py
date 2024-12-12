@@ -10,6 +10,7 @@ import jwt
 from django.conf import settings
 from auth.views import *
 from django.utils import timezone
+from datetime import timedelta
 
 
 @permission_classes([IsAuthenticated])
@@ -177,7 +178,8 @@ class CompetitionSignUpView(APIView):
             return Response({"error": "You have already signed up for this competition."}, status=status.HTTP_400_BAD_REQUEST)
         
         return Response({"message": "Successfully signed up for the competition."}, status=status.HTTP_201_CREATED)
-    
+
+@permission_classes([IsAuthenticated])
 class userCompetitions(APIView):
     #get all the competitions info the user is signed up to
     def get(self, request):
@@ -200,7 +202,7 @@ class userCompetitions(APIView):
         serializer = CompetitionSerializer(competitions, many=True)
         return Response(serializer.data)
     
-        
+@permission_classes([IsAuthenticated])   
 class uploadSubmission(APIView):
     
     def post(self, request):
@@ -251,3 +253,44 @@ class uploadSubmission(APIView):
         
         return Response(submission_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
+
+@permission_classes([IsAuthenticated])
+class getScoresCompetition(APIView):
+    
+        def format_duration(duration):
+            # Convert the duration to a timedelta object if it's not already
+            if isinstance(duration, float):
+                duration = timedelta(seconds=duration)
+            # Format the duration as hh:mm:ss
+            total_seconds = int(duration.total_seconds())
+            hours, remainder = divmod(total_seconds, 3600)
+            minutes, seconds = divmod(remainder, 60)
+            return f"{hours:02}:{minutes:02}:{seconds:02}"
+        
+        def get(self, request):
+            competition_id = request.query_params.get('competition_id')
+            
+            if not competition_id:
+                return Response({"error": "Please provide a competition_id."}, status=status.HTTP_400_BAD_REQUEST)
+            
+            try:
+                competition = Competition.objects.get(id=competition_id)
+            except Competition.DoesNotExist:
+                return Response({"error": "Competition not found."}, status=status.HTTP_404_NOT_FOUND)
+            
+            submissions = Submission.objects.filter(competition=competition)
+            #retrive user and user score for the competition submission
+            scores = []
+            for submission in submissions:
+                user = User.objects.get(id=submission.contestant.id)
+                score = User_Competition.objects.get(user=user, competition=competition).score
+                time = getScoresCompetition.format_duration(submission.overall_time)
+                scores.append({'user': user.username, 'score': score, 'time': time})
+            
+            # Sort the scores by time
+            scores = sorted(scores, key=lambda x: x['time'])    
+            
+            return Response(scores)
+        
+        
+        
