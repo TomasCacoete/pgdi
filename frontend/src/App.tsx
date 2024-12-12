@@ -14,6 +14,7 @@ import CreateCompetitionsMobile from './Mobile/CreateCompetitionsMobile/CreateCo
 import CompetitionSubmissonsMobile from './Mobile/CompetitionsSubmissions/CompetitionSubmissions.tsx';
 import RegisterMobile from './Mobile/RegisterMobile/Register.tsx';
 import UserPage from './Mobile/UserPage/UserPage.tsx';
+import Scoreboard from './Mobile/CompetitionScoreBoard/Scoreboard.tsx';
 
 function App()  {
   return (
@@ -29,7 +30,8 @@ function App()  {
             <Route path='/create_competition' element={<CreateCompetitionsMobile/>}/>
             <Route path="/register" element={<RegisterMobile/>} />
             <Route path="/user" element={<UserPage />} />
-          </Routes>
+            <Route path="/scoreboard/:id" element={<Scoreboard />} />
+            </Routes>
         </AuthProvider>
       </Router>
     </>
