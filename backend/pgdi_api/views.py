@@ -11,6 +11,7 @@ from django.conf import settings
 from auth.views import *
 from django.utils import timezone
 from datetime import timedelta
+import random
 
 
 @permission_classes([IsAuthenticated])
@@ -174,6 +175,10 @@ class CompetitionSignUpView(APIView):
             user=user, competition=competition
         )
         
+        #give user a random score for now
+        user_competition.score = random.uniform(0, 100)
+        user_competition.save()
+        
         if not created:
             return Response({"error": "You have already signed up for this competition."}, status=status.HTTP_400_BAD_REQUEST)
         
@@ -244,8 +249,13 @@ class uploadSubmission(APIView):
         except User_Competition.DoesNotExist:
             return Response({"error": "You have not signed up for this competition."}, status=status.HTTP_400_BAD_REQUEST)
         
+        #give use random overall time for now
+        overall_time = random.uniform(1000, 5000)
+        data = {'file': gpx_file, 'contestant': user.id, 'competition': competition_id, 'overall_time': overall_time}
+        
+        
         # Serialize data
-        submission_serializer = SubmissionSerializer(data={'file': gpx_file, 'contestant': user.id, 'competition': competition_id})
+        submission_serializer = SubmissionSerializer(data=data)
         
         if submission_serializer.is_valid():
             submission_serializer.save()

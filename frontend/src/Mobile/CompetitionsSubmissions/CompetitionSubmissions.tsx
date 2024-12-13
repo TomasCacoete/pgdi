@@ -63,7 +63,7 @@ const MyCompetitions: React.FC = () => {
             });
 
             if (response.status === 201) {
-                setStatusMessage(`File uploaded successfully for competition: ${competitionId}`);
+                setStatusMessage('File uploaded successfully for competitio');//: ${competitionId}`);
             } else {
                 setStatusMessage(`Failed to upload file for competition: ${competitionId}`);
             }

@@ -4,12 +4,13 @@ import axios from 'axios';
 import AuthContext from '../../auth/authContext';
 import './UserPage.css';
 
-import user from '../../assets/user-photo.jpg'
+import userphoto from '../../assets/user-photo.jpg'
 import logo from '../../assets/logo2.svg';
 import Navbar from '../Components/Navbar/Navbar';
 
 const UserPage = () => {
     const { authTokens } = useContext(AuthContext);
+    const {logoutUser} = useContext(AuthContext);   
 
     const headers = { // se nao conseguir ler token pagina nao renderiza
         Authorization: `Bearer ${authTokens.access}`,
@@ -19,6 +20,7 @@ const UserPage = () => {
 
     const [routes, setRoutes] = useState<string[]>([]);
     const [competitions, setCompetitions] = useState<any[]>([]);
+    const [user, setUser] = useState<any>();
 
 
     useEffect(() => {
@@ -34,7 +36,7 @@ const UserPage = () => {
                     route.file = route.file.replace("/media/routes/", "");
                 });
                 setRoutes(response.data);
-                console.log(routes)
+                //console.log(routes)
             } catch (error) {
                 console.error("Error fetching routes:", error);
             }
@@ -53,8 +55,24 @@ const UserPage = () => {
             }
         };
 
+        const fetchUser = async () => {
+            try {
+                const response = await axios.get("http://127.0.0.1:8000/pgdi_api/user/", {
+                    headers: {
+                        Authorization: `Bearer ${authTokens.access}`,
+                    },
+                });
+                setUser(response.data);
+                //console.log(response.data);
+            } catch (error) {
+                console.error("Error fetching user:", error);
+            }
+        }
+
+
         fetchRoutes();
         fetchUserCompetitions();
+        fetchUser();
     }, [authTokens]);
 
     const handleUploadRoutes = () => {
@@ -70,14 +88,13 @@ const UserPage = () => {
             <div className="header">
                 <div className="profile-picture">
                     <img
-                        src={user}
+                        src={userphoto}
                         alt="User Profile"
                         className="profile-img"
                     />
                 </div>
                 <div className="user-info">
-                    <h2>Gustavo</h2>
-                    <h3>Soares</h3>
+                    <h2>{user?.first_name} {user?.last_name}</h2>
                 </div>
             </div>
 
@@ -107,6 +124,11 @@ const UserPage = () => {
                         </div>
                     ))}
                 </div>
+            </div>
+            <div className="logout-section">
+                <button className="logout-button" onClick={logoutUser}>
+                    Logout
+                </button>
             </div>
         </div>
         <Navbar />  
