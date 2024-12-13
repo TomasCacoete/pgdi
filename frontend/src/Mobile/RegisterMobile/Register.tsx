@@ -45,7 +45,7 @@ const Register = () => {
 
     return (
         <div className="RegisterContainer">
-            <div className="logo">
+            <div className="logoRegister">
                 <img src={Logo} alt="Logo" />
             </div>
             <div className="MainRegister">

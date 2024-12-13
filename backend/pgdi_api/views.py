@@ -249,8 +249,9 @@ class uploadSubmission(APIView):
         except User_Competition.DoesNotExist:
             return Response({"error": "You have not signed up for this competition."}, status=status.HTTP_400_BAD_REQUEST)
         
-        #give use random overall time for now
-        overall_time = random.uniform(1000, 5000)
+        #give use random overall time for now in hh:mm:ss format
+        time = random.uniform(3000, 10000) # time in seconds
+        overall_time = timedelta(seconds=time) # time in hh:mm:ss format
         data = {'file': gpx_file, 'contestant': user.id, 'competition': competition_id, 'overall_time': overall_time}
         
         
@@ -260,8 +261,7 @@ class uploadSubmission(APIView):
         if submission_serializer.is_valid():
             submission_serializer.save()
             return Response(submission_serializer.data, status=status.HTTP_201_CREATED)
-        
-        return Response(submission_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(submission_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
     
 
 @permission_classes([IsAuthenticated])
